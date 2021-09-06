@@ -1,8 +1,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Tech Blog</title>
-  <link rel="stylesheet" href="/css/jass.css">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+  {{!-- CSS links --}}
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/error.css">
+
 </head>
 
 <body>
@@ -11,11 +18,60 @@
       <h1>
         &#128187 Tech Blog &#128540
       </h1>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            {{!-- if not logged in --}}
+            {{#unless logged_in}}
+            <a id="signup" href="/signup" class="btn btn-outline-secondary my-2 mr-3 my-sm-0">Signup</a>
+            <a id="login" href="/login" class="btn btn-outline-secondary my-2 my-sm-0">Login</a>
+            {{/unless}}
+
+            {{!-- if logged in --}}
+            {{#if logged_in}}
+            <a id="logout" href="/" class="btn btn-outline-secondary my-2 my-sm-0">Logout</a>
+            {{/if}}
+
+          </form>
+        </div>
+      </nav>
     </header>
-      <main class="container container-fluid mt-5">
-        {{{ body }}}
-      </main>
+    <main class="container container-fluid my-3">
+      {{{ body }}}
+    </main>
   </div>
-  </body>
+
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+
+</body>
 
 </html>

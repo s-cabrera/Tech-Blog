@@ -1,0 +1,17 @@
+/* Main CSS */
+.post_header {
+    float: right;
+    font-size: 75%;
+    
+}
+
+
+/* Signup CSS */
+.btn-centered{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+/* Login CSS */
