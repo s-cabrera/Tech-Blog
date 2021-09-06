@@ -39,9 +39,13 @@ const signupBtnEventHandler = async(event) => {
             headers: { 'Content-Type': 'application/json' },
         });
 
-        if(!response.ok){
-            //Display the message
-            const message = response.json();
+        if (response.ok) {
+            // If successful, redirect the browser to the profile page
+            document.location.replace('/dashboard');
+        }
+        else{
+            //send display message
+            const message = await response.json();
             alert.textContent = message;
             alert.classList.remove("d-none");
         }

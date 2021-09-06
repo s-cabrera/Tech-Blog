@@ -7,17 +7,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
   {{!-- CSS links --}}
-  <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/error.css">
+  <link rel="stylesheet" href="/css/style.css">
+  
 
 </head>
 
 <body>
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
-      <h1>
-        &#128187 Tech Blog &#128540
-      </h1>
+      
+      <h1>&#128187 Tech Blog &#128540</h1>
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">Home</a>
@@ -28,35 +28,32 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
             </li>
+            {{!-- {{#unless logged_in}}
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a id="signup" href="/signup" class="nav-link">Signup</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+            <li class="nav-item">
+              <a id="login" href="/login" class="nav-link">Login</a>
             </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            {{!-- if not logged in --}}
-            {{#unless logged_in}}
-            <a id="signup" href="/signup" class="btn btn-outline-secondary my-2 mr-3 my-sm-0">Signup</a>
-            <a id="login" href="/login" class="btn btn-outline-secondary my-2 my-sm-0">Login</a>
             {{/unless}}
 
-            {{!-- if logged in --}}
             {{#if logged_in}}
-            <a id="logout" href="/" class="btn btn-outline-secondary my-2 my-sm-0">Logout</a>
+            <li class="nav-item"><a id="logout" href="/" class="btn btn-outline-secondary my-2 my-sm-0">Logout</a></li>
+            {{/if}} --}}
+
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+           
+            {{#unless logged_in}}
+              <a id="signup" href="/signup" class="btn btn-outline-secondary my-2 mr-3 my-sm-0">Signup</a>
+              <a id="login" href="/login" class="btn btn-outline-secondary my-2 my-sm-0">Login</a>
+            {{/unless}}
+
+            {{#if logged_in}}
+              <a id="logout" href="/" class="btn btn-outline-secondary my-2 my-sm-0">Logout</a>
             {{/if}}
 
           </form>

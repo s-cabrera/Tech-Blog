@@ -26,9 +26,23 @@ const loginBtnEventHandler = async(event) => {
         //Make the POST request to the backend (/api/user/login)
         const response = await fetch('/api/user/login', {
             method: 'POST',
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({
+                 email : email.value.trim(), 
+                 password : password.value.trim() 
+            }),
             headers: { 'Content-Type': 'application/json' },
         });
+
+        if (response.ok) {
+            // If successful, redirect the browser to the profile page
+            document.location.replace('/dashboard');
+        }
+        else{
+            //send display message
+            const message = await response.json();
+            alert.textContent = message;
+            alert.classList.remove("d-none");
+        }
     }
     else{
         alert.textContent = 'Missing input fields above!';

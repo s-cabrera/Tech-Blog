@@ -1,11 +1,6 @@
 const router = require('express').Router();
+const userRoutes = require('./userRoutes');
 
-router.post('/signup', async (req, res) => {
-    try {
-      res.render('homepage');
-    } catch (err) {
-      res.status(500).json(err);
-    }
-});
+router.use('/user', userRoutes);
 
 module.exports = router;
