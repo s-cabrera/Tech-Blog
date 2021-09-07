@@ -34,7 +34,7 @@ const loginBtnEventHandler = async(event) => {
         });
 
         if (response.ok) {
-            // If successful, redirect the browser to the profile page
+            // If successful, redirect the browser to their dashboard page
             document.location.replace('/dashboard');
         }
         else{

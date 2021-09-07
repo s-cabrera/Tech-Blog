@@ -1,17 +1,19 @@
+<div class="row mb-3 position-relative">
+    <h2 class="col-auto">Your Dashboard </h2>
+    <a id="dashboard-add-btn" class="btn btn-outline-secondary col-auto" href="/api/post/">New Post</a>
+</div>
 
-<h2 class="mb-3">Your Dashboard</h2>
-
-{{!-- for each of the posts --}}
+{{#each posts as |post|}}
 <div class="card">
-    <h4 class="card-header">Post Title
+    <h4 class="card-header">{{post.title}}
         <span class="post_header p-1">Posted by
-            <span class="post_author">Author</span>
+            <span class="post_author">{{post.first_name}} {{post.last_name}}</span>
             on
-            <span class="post_date">05/08/2021</span>
+            <span class="post_date">{{format_date post.created_at}}</span>
         </span>
     </h4>
     <div class="card-body">
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text">{{post.content}}</p>
     </div>
 </div>
-{{!-- end of for each --}}
+{{/each}}

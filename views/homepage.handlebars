@@ -1,0 +1,17 @@
+{{!-- Print out the general dashboard --}}
+{{!-- {{#if posts}} --}}
+{{#each posts as |post|}}
+<div class="card">
+    <h4 class="card-header">{{post.title}}
+        <span class="post_header p-1">Posted by
+            <span class="post_author">{{first_name}} {{last_name}}</span>
+            on
+            <span class="post_date">the date{{format_date post.created_at}}</span>
+        </span>
+    </h4>
+    <div class="card-body">
+        <p class="card-text">{{post.content}}</p>
+    </div>
+</div>
+{{/each}}
+{{!-- {{/if}} --}}

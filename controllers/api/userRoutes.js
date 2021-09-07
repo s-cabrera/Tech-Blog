@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User} = require('../../models');
+const { User } = require('../../models');
 
 /* Endpoint ('/api/user/') */
 
@@ -29,32 +29,36 @@ router.post('/login', async (req, res) => {
         });
 
     } catch (err) {
-        res.status(400).json(err);
+        res.status(400).json("Something went wrong with the login process");
     }
 });
 
 router.post('/signup', async (req, res) => {
-	try {
-		console.log(req.body);
+    try {
+        console.log(req.body);
 
-		//Check to see if email is already used
-		const userExists = await User.findOne({ where: { email: req.body.email } });
+        //Check to see if email is already used
+        const userExists = await User.findOne({ where: { email: req.body.email } });
 
-		if(!userExists){
-			const userData = await User.create(req.body);
-
-			req.session.save(() => {
-				req.session.user_id = userData.id;
-				req.session.logged_in = true;
-				res.status(200).json(userData);
-			});
-		}
-		else{
-			res.status(401).json('Email already in use');
-		}
-	} catch (err) {
-		res.status(400).json(err);
-	}
+        if (!userExists) {
+            const userData = await User.create(req.body);
+            if (userData) {
+                req.session.save(() => {
+                    req.session.user_id = userData.id;
+                    req.session.logged_in = true;
+                    res.status(200).json(userData);
+                });
+            }
+            else{
+                res.status(400).json("Your password needs to be at least 8 characters!");
+            }
+        }
+        else {
+            res.status(401).json('Email already in use');
+        }
+    } catch (err) {
+        res.status(400).json("Something happened with the signup process!");
+    }
 });
 
 router.post('/logout', (req, res) => {

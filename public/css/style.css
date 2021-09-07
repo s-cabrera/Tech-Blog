@@ -5,6 +5,11 @@
     
 }
 
+#dashboard-add-btn{
+    position: absolute;
+    right: 1.5%;
+}
+
 /* Signup CSS */
 .btn-centered{
     position: absolute;
