@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   try {
     //Get all of the Posts
     const postData = await Post.findAll({ 
-      attributes: ['title', 'content', 'updated_at'],
+      attributes: ['id', 'title', 'content', 'updated_at'],
       include:{
         model: User,
         attributes:['first_name', 'last_name']

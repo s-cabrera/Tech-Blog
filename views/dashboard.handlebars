@@ -1,14 +1,14 @@
 <div class="row mb-3 position-relative">
     <h2 class="col-auto">Dashboard </h2>
-    <a id="dashboard-add-btn" class="btn btn-outline-secondary col-auto" href="/api/post/">New Post</a>
+    <a id="dashboard-add-btn" class="btn btn-outline-secondary col-auto" href="/api/post/add/">New Post</a>
 </div>
 
 {{#each user.posts as |post|}}
 <div class="card mb-3">
     <h4 class="card-header">{{post.title}}
-        <a href="/api/post/{{post.id}}" class="btn btn-outline-secondary edit-btn ml-2" id="{{post.id}}">Edit</a>
+        <a href="/api/post/edit/{{post.id}}" class="btn btn-outline-secondary edit-btn ml-2">Edit</a>
         <span class="post_header p-1">Posted by
-            <span class="post_author">{{../user.first_name}} {{../user.last_name}}</span>
+            <span class="post_author">{{../user.username}}</span>
             on
             <span class="post_date">{{format_date post.updated_at}}</span>
         </span>

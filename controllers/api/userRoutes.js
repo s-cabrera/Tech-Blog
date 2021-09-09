@@ -5,10 +5,10 @@ const { User } = require('../../models');
 
 router.post('/login', async (req, res) => {
     try {
-        const userData = await User.findOne({ where: { email: req.body.email } });
+        const userData = await User.findOne({ where: { username: req.body.username } });
 
         if (!userData) {
-            res.status(400).json(`No user found with the email: ${req.body.email}`);
+            res.status(400).json(`No user found with the username: ${req.body.username}`);
             return;
         }
 
@@ -38,9 +38,11 @@ router.post('/signup', async (req, res) => {
         console.log(req.body);
 
         //Check to see if email is already used
-        const userExists = await User.findOne({ where: { email: req.body.email } });
+        const emailExists = await User.findOne({ where: { email: req.body.email } });
 
-        if (!userExists) {
+        const usernameExists = await User.findOne({ where: { username: req.body.username } });
+
+        if (!emailExists && !usernameExists) {
             const userData = await User.create(req.body);
             if (userData) {
                 req.session.save(() => {
@@ -49,9 +51,13 @@ router.post('/signup', async (req, res) => {
                     res.status(200).json(userData);
                 });
             }
+            
             else{
                 res.status(400).json("Your password needs to be at least 8 characters!");
             }
+        }
+        else if(usernameExists){
+            res.status(401).json('Username already exists');
         }
         else {
             res.status(401).json('Email already in use');

@@ -1,28 +1,45 @@
-{{!-- Only display if logged_in --}}
-{{#if logged_in}}
-<form class="post-add card border border-secondary rounded p-3 col-md-6 m-auto">
-    <h4 class="form-group card-header bg-white">New Post</h4>
+<div class="card mb-3">
+    <h4 class="card-header">{{post.title}}
+        {{#if logged_in}}
+            <a class="btn btn-outline-secondary comment-btn ml-2">Add Comment</a>
+        {{/if}}
+        <span class="post_header p-1">Posted by
+            <span class="post_author">{{../user.username}}</span>
+            on
+            <span class="post_date">{{format_date post.updated_at}}</span>
+        </span>
+    </h4>
+
     <div class="card-body">
-        <div class="form-group col-auto">
-            <label for="post-title">Title
-                <span class="text-danger font-weight-bold d-none">*</span>
-            </label>
-            <input type="input" class="form-control" id="post-title" placeholder="New Post Title">
-        </div>
-        <div class="form-group col-auto">
-            <label for="post-content">Title
-                <span class="text-danger font-weight-bold d-none">*</span>
-            </label>
-            <textarea type="input" class="form-control" id="post-content" aria-label="With textarea" 
-                placeholder="Add content here"></textarea>
-        </div>
-        <p id="post-alert" class="form-group col-auto text-danger d-none">Alert message HERE!!!</p>
-        <div class="form-group position-relative p-3 mb-2">
-            <button type="submit" class="btn btn-primary btn-centered">Submit</button>
-        </div>
+        <p class="card-text">{{post.content}}</p>
     </div>
-</form>
+    {{!-- Comment form --}}
+    <div class="card-body">
+        <form class="post-comment card border border-secondary rounded p-3 col-md-6 m-auto" id="{{post.id}}">
+            <h4 class="form-group card-header bg-white">Comment</h4>
+            <div class="card-body">
+                <div class="form-group col-auto">
+                    <label for="post-content">Content
+                        <span class="text-danger font-weight-bold d-none">*</span>
+                    </label>
+                    <textarea type="input" class="form-control" id="comment-content"
+                        aria-label="With textarea"></textarea>
+                </div>
+                <p id="comment-alert" class="form-group col-auto text-danger d-none">Alert message HERE!!!</p>
+                <div class="form-group position-relative p-3 mb-2">
+                    <button type="submit" class="btn btn-primary btn-centered">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {{!-- The Display for comments --}}
+    <div class="card-body">
+        {{#each comments as |comment|}}
+            {{> comment-content}}
+        {{/each}}
+    </div>
+</div>
 
-
-<script src="/js/add.js"></script>
+{{#if logged_in}}
+    <script src="/js/comment.js"></script>
 {{/if}}

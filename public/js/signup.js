@@ -9,10 +9,11 @@ const signupBtnEventHandler = async(event) => {
     const first_name = document.querySelector('#signup-first-name');
     const last_name = document.querySelector('#signup-last-name');
     const email = document.querySelector('#signup-email');
+    const username = document.querySelector('#signup-username');
     const password = document.querySelector('#signup-password');
     const alert = document.querySelector('#signup-alert');
 
-    const inputs = [first_name, last_name, email, password];
+    const inputs = [first_name, last_name, email, username, password];
 
     //Add the d-none class to alerts and missing fields spans
     if(!alert.classList.contains('d-none')){alert.classList.add('d-none')}
@@ -24,7 +25,8 @@ const signupBtnEventHandler = async(event) => {
     })
 
     //Check for empty fields
-    if(first_name.value.trim() && last_name.value.trim() && email.value.trim() && password.value.trim()){
+    if(first_name.value.trim() && last_name.value.trim() && email.value.trim() &&
+        username.value.trim() && password.value.trim()){
         //Make the POST request to the backend (/signup)
         const response = await fetch('/api/user/signup', {
             method: 'POST',
@@ -32,7 +34,8 @@ const signupBtnEventHandler = async(event) => {
                 { 
                     first_name: first_name.value.trim(), 
                     last_name: last_name.value.trim(), 
-                    email: email.value.trim(), 
+                    email: email.value.trim(),
+                    username: username.value.trim(), 
                     password: password.value.trim() 
                 }
             ),

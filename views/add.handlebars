@@ -1,0 +1,28 @@
+{{!-- Only display if logged_in --}}
+{{!-- {{#if logged_in}} --}}
+<form class="post-add card border border-secondary rounded p-3 col-md-6 m-auto">
+    <h4 class="form-group card-header bg-white">New Post</h4>
+    <div class="card-body">
+        <div class="form-group col-auto">
+            <label for="post-title">Title
+                <span class="text-danger font-weight-bold d-none">*</span>
+            </label>
+            <input type="input" class="form-control" id="post-title" placeholder="New Post Title">
+        </div>
+        <div class="form-group col-auto">
+            <label for="post-content">Title
+                <span class="text-danger font-weight-bold d-none">*</span>
+            </label>
+            <textarea type="input" class="form-control" id="post-content" aria-label="With textarea" 
+                placeholder="Add content here"></textarea>
+        </div>
+        <p id="post-alert" class="form-group col-auto text-danger d-none">Alert message HERE!!!</p>
+        <div class="form-group position-relative p-3 mb-2">
+            <button type="submit" class="btn btn-primary btn-centered">Submit</button>
+        </div>
+    </div>
+</form>
+
+
+<script src="/js/add.js"></script>
+{{!-- {{/if}} --}}

@@ -1,7 +1,9 @@
 {{!-- Print out the general dashboard --}}
 {{#each posts as |post|}}
 <div class="card mb-3">
+    
     <h4 class="card-header">{{post.title}}
+        <a href="/api/post/{{post.id}}" id="{{post.id}}" class="btn btn-outline-secondary view-btn ml-2">View</a>
         <span class="post_header p-1">Posted by
             <span class="post_author">{{post.user.first_name}} {{post.user.last_name}}</span>
             on

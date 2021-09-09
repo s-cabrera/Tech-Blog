@@ -6,11 +6,11 @@ const loginBtnEventHandler = async(event) => {
     console.log("Login button clicked");
 
     //Store data  from the input fields to the 
-    const email = document.querySelector('#login-email');
+    const username = document.querySelector('#login-username');
     const password = document.querySelector('#login-password');
     const alert = document.querySelector('#login-alert');
 
-    const inputs = [email, password];
+    const inputs = [username, password];
 
     //Add the d-none class to alerts and missing fields spans
     if(!alert.classList.contains('d-none')){alert.classList.add('d-none')}
@@ -22,26 +22,24 @@ const loginBtnEventHandler = async(event) => {
     })
 
     //Check for empty fields
-    if(email.value.trim() && password.value.trim()){
+    if(username.value.trim() && password.value.trim()){
         //Make the POST request to the backend (/api/user/login)
         const response = await fetch('/api/user/login', {
             method: 'POST',
             body: JSON.stringify({
-                 email : email.value.trim(), 
+                 username : username.value.trim(), 
                  password : password.value.trim() 
             }),
             headers: { 'Content-Type': 'application/json' },
         });
 
+        const message = await response.json();
+        alert.textContent = message;
+        alert.classList.remove("d-none");
+
         if (response.ok) {
             // If successful, redirect the browser to their dashboard page
             document.location.replace('/dashboard');
-        }
-        else{
-            //send display message
-            const message = await response.json();
-            alert.textContent = message;
-            alert.classList.remove("d-none");
         }
     }
     else{

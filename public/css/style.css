@@ -20,7 +20,7 @@
     right: 1.5%;
 }
 
-.edit-btn{
+.edit-btn, .view-btn, .comment-btn{
     float: right;
 }
 
@@ -31,6 +31,3 @@
     left: 50%;
     transform: translateX(-50%);
 }
-
-
-/* Login CSS */
