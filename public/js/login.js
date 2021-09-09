@@ -34,12 +34,16 @@ const loginBtnEventHandler = async(event) => {
         });
 
         const message = await response.json();
-        alert.textContent = message;
-        alert.classList.remove("d-none");
 
         if (response.ok) {
             // If successful, redirect the browser to their dashboard page
+            alert.textContent = message.message;
+            alert.classList.remove("d-none")
             document.location.replace('/dashboard');
+        }
+        else{
+            alert.textContent = message;
+            alert.classList.remove("d-none")
         }
     }
     else{

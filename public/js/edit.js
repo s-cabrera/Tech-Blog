@@ -21,7 +21,7 @@ const editPostEventListener = async(event) => {
     //Check for empty fields
     if (title.value.trim() && content.value) {
         //Make POST Request to the backend (/api/post/add)
-        const response = await fetch(`/api/post/edit/${event.target.id}`, {
+        const response = await fetch(`/api/posts/edit/${event.target.id}`, {
             method: 'PUT',
             body: JSON.stringify({
                 title: title.value.trim(),

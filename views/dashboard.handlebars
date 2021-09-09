@@ -1,12 +1,12 @@
 <div class="row mb-3 position-relative">
     <h2 class="col-auto">Dashboard </h2>
-    <a id="dashboard-add-btn" class="btn btn-outline-secondary col-auto" href="/api/post/add/">New Post</a>
+    <a id="dashboard-add-btn" class="btn btn-outline-secondary col-auto" href="/api/posts/add">New Post</a>
 </div>
 
 {{#each user.posts as |post|}}
 <div class="card mb-3">
     <h4 class="card-header">{{post.title}}
-        <a href="/api/post/edit/{{post.id}}" class="btn btn-outline-secondary edit-btn ml-2">Edit</a>
+        <a href="/api/posts/edit/{{post.id}}" class="btn btn-outline-secondary edit-btn ml-2">Edit</a>
         <span class="post_header p-1">Posted by
             <span class="post_author">{{../user.username}}</span>
             on

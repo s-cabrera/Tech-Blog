@@ -17,7 +17,7 @@ const commentSubmitEventHandler = async(event) => {
     }
 
     if(content.value.trim()){
-        const response = await fetch('/api/post/comment', {
+        const response = await fetch('/api/posts/comment', {
             method: 'POST',
             body: JSON.stringify({
                  post_id : event.target.id, 
@@ -31,7 +31,7 @@ const commentSubmitEventHandler = async(event) => {
         alert.classList.remove("d-none");
 
         if(response.ok){
-            document.location.replace(`/api/post/${event.target.id}`);
+            document.location.replace(`/api/posts/post/${event.target.id}`);
         }
     }
     else{

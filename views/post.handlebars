@@ -4,19 +4,18 @@
             <a class="btn btn-outline-secondary comment-btn ml-2">Add Comment</a>
         {{/if}}
         <span class="post_header p-1">Posted by
-            <span class="post_author">{{../user.username}}</span>
+            <span class="post_author">{{post.user.username}}</span>
             on
             <span class="post_date">{{format_date post.updated_at}}</span>
         </span>
     </h4>
 
     <div class="card-body">
-        <p class="card-text">{{post.content}}</p>
-    </div>
-    {{!-- Comment form --}}
-    <div class="card-body">
-        <form class="post-comment card border border-secondary rounded p-3 col-md-6 m-auto" id="{{post.id}}">
-            <h4 class="form-group card-header bg-white">Comment</h4>
+        <p class="card-text border border-secondary rounded p-2">{{post.content}}</p>
+        <form class="post-comment card border border-secondary rounded p-2 m-auto d-none" id="{{post.id}}">
+            <h4 class="form-group card-header bg-white">Comment
+                <button type="submit" class="btn btn-primary edit-btn">Submit</button>
+            </h4>
             <div class="card-body">
                 <div class="form-group col-auto">
                     <label for="post-content">Content
@@ -26,14 +25,12 @@
                         aria-label="With textarea"></textarea>
                 </div>
                 <p id="comment-alert" class="form-group col-auto text-danger d-none">Alert message HERE!!!</p>
-                <div class="form-group position-relative p-3 mb-2">
-                    <button type="submit" class="btn btn-primary btn-centered">Submit</button>
-                </div>
             </div>
         </form>
     </div>
     {{!-- The Display for comments --}}
     <div class="card-body">
+        <h2>Comments</h2>
         {{#each comments as |comment|}}
             {{> comment-content}}
         {{/each}}

@@ -3,19 +3,21 @@ const withAuth = require('../../utils/auth');
 const {Post, User, Comment} = require('../../models');
 const moment = require('moment');
 
-// Endpoint /api/post/
+/* Endpoint ('/api/posts/') */
+
+router.get('/add', withAuth, async (req, res) => {
+  console.log('I"M IN THE Get /api');
+  try {  
+    res.status(200).render('add');
+  } catch (err) {
+    res.status(400).json("Not found");
+  }
+});
 
 //Individual 
-router.get('/', withAuth, async (req, res) => {
-  try {
-    res.redirect('/dashboard');
-  } catch (err) {
-    res.status(500).json('Not found');
-  }
-})
-
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/post/:id', async (req, res) => {
     try {
+      console.log(`post_id: ${req.params.id}`);
       const postData = await Post.findByPk(req.params.id, {
         attributes : ['id', 'title', 'content'],
         include: [
@@ -27,39 +29,30 @@ router.get('/:id', withAuth, async (req, res) => {
       });
       const post = postData.get({ plain: true });
       
-      const commentData = await Comment.findAll(
-        {
-          attributes: ['content', 'created_at'],
-          include: [
-            {
-              model: User,
-              attributes: ['first_name', 'last_name', 'username']
-            }
-          ],
-          order: ['created_at', 'DESC']
+      console.log(post);
+
+      const commentData = await Comment.findAll({
+        where: {post_id: req.params.id},
+        include: [{
+          model: User,
+          attributes: ['username']
+        }]
       })
-      
-      const comments = commentData.get({ plain: true });
+
+      console.log("Past the comments Data!");
+
+      const comments = commentData.map((comment) => comment.get({ plain: true }));
+
+      console.log(comments);
 
       res.render('post',{
         logged_in: req.session.logged_in,
         post,
-        comments
+        comments: comments
       });
     } catch (err) {
       res.status(500).json(err);
     }
-});
-
-router.get('/add', withAuth, async (req, res) => {
-  console.log('I"M IN THE Get /api');
-  try {  
-    res.status(200).render('add', {
-      logged_in: req.session.logged_in 
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
 });
 
 router.get('/edit/:id', withAuth, async(req, res) => {
@@ -87,7 +80,7 @@ router.get('/edit/:id', withAuth, async(req, res) => {
 })
 
 
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/edit/:id', withAuth, async (req, res) => {
   try {
     await Post.update(
       {
@@ -105,7 +98,7 @@ router.put('/:id', withAuth, async (req, res) => {
   }
 });
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/add', withAuth, async (req, res) => {
     try {
         //Add the post
       console.log(req.body);
