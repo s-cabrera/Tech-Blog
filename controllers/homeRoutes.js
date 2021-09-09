@@ -5,23 +5,42 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   try {
     //Get all of the Posts
-    const postData = await Post.findAll({
-      attributes: ['title', 'content', 'created_at'],
-      include: [
-        {
-          model: User,
-          attributes: ['first_name', 'last_name'],
-        }
+    const postData = await Post.findAll({ 
+      attributes: ['title', 'content', 'updated_at'],
+      include:{
+        model: User,
+        attributes:['first_name', 'last_name']
+      },
+      order: [
+        ['updated_at', 'DESC']
       ]
-    });
 
-    console.log(postData);
-
+   })
+    
     // Serialize data so the template can read it
-    const posts = postData.map((post) => post.get({ plain: true }));
+    const posts = postData.map((e) => e.get({ plain: true }));
+    
+    console.log(posts);
+
+    if(!req.session.logged_in){
+      res.render('homepage', {
+        posts,
+        logged_in: req.session.logged_in
+      });
+      return;
+    }
+
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes:['first_name', 'last_name']
+    })
+
+    const user = userData.get({ plain: true });
+
+    console.log(user);
 
     res.render('homepage', {
       posts,
+      user,
       logged_in: req.session.logged_in
     });
 
@@ -39,12 +58,14 @@ router.get('/dashboard', withAuth, async (req, res) => {
       include: [
         {
           model: Post,
-          attributes: ['title', 'content', 'created_at'],
-        }
-      ]
-    });
+          attributes: ['id', 'title', 'content', 'updated_at'],
+          order : [
+            ['updated_at', 'DESC']
+          ]
+        },
+      ],
 
-    console.log(postData);
+    });
 
     // Serialize data so the template can read it
     const posts = postData.get({ plain: true });
@@ -52,7 +73,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     console.log(posts);
 
     res.render('dashboard', {
-      ...posts,
+      user: posts,
       logged_in: req.session.logged_in
     });
   } catch (err) {

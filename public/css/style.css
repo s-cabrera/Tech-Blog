@@ -1,3 +1,12 @@
+/* Main */
+#brand {
+    border-bottom: 5px solid black;
+    background: rgb(49,50,50);
+    background: linear-gradient(54deg, rgba(49,50,50,1) 3%, rgba(255,255,255,1) 98%);
+    color:white;
+    text-shadow: 2px 2px black;
+}
+
 /* Post */
 .post_header {
     float: right;
@@ -5,10 +14,16 @@
     
 }
 
+/* Dashboard */
 #dashboard-add-btn{
     position: absolute;
     right: 1.5%;
 }
+
+.edit-btn{
+    float: right;
+}
+
 
 /* Signup CSS */
 .btn-centered{

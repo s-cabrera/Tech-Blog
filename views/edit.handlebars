@@ -1,0 +1,23 @@
+<form class="post-edit card border border-secondary rounded p-3 col-md-6 m-auto" id="{{post.id}}" >
+    <h4 class="form-group card-header bg-white">Edit Post</h4>
+    <div class="card-body">
+        <div class="form-group col-auto">
+            <label for="post-title">Title
+                <span class="text-danger font-weight-bold d-none">*</span>
+            </label>
+            <input type="text" class="form-control" id="post-title" value="{{post.title}}"></input>
+        </div>
+        <div class="form-group col-auto">
+            <label for="post-content">Content
+                <span class="text-danger font-weight-bold d-none">*</span>
+            </label>
+            <textarea type="input" class="form-control" id="post-content" value="{{post.content}}" aria-label="With textarea">{{post.content}}</textarea>
+        </div>
+        <p id="post-alert" class="form-group col-auto text-danger d-none">Alert message HERE!!!</p>
+        <div class="form-group position-relative p-3 mb-2">
+            <button type="submit" class="btn btn-primary btn-centered">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script src="/js/edit.js"></script>

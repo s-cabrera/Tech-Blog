@@ -9,14 +9,14 @@
   {{!-- CSS links --}}
   <link rel="stylesheet" href="/css/error.css">
   <link rel="stylesheet" href="/css/style.css">
-  
+
 </head>
 
 <body>
   <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
+    <header class="display-flex justify-space-between align-center">
       
-      <h1>&#128187 Tech Blog &#128540</h1>
+      <h1 id="brand" class="bg-secondary bg-gradient p-2">&#128187 Tech Blog &#128540</h1>
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/">Home</a>
@@ -52,6 +52,10 @@
             {{/unless}}
 
             {{#if logged_in}}
+              {{!-- For homepage --}}
+              <span class="text-end font-italic text-primary mr-4">Welcome, {{user.first_name}} {{user.last_name}} {{post.user.first_name}} {{post.user.last_name}}</span>
+              {{!-- For dashboard --}}
+              {{!-- <span class="text-end font-italic text-primary mr-3 btn-centered">Welcome {{first_name}} {{last_name}}</span> --}}
               <a id="logout" href="/" class="btn btn-outline-secondary my-2 my-sm-0">Logout</a>
             {{/if}}
 

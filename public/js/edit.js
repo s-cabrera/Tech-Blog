@@ -1,10 +1,10 @@
-const addPostEventListener = async(event) => {
+const editPostEventListener = async(event) => {
     event.preventDefault();
-
+    console.log("Made it to the listener");
     const title = document.querySelector('#post-title');
     const content = document.querySelector('#post-content');
     const alert = document.querySelector('#post-alert');
-
+    console.log("Made it past vars");
     const inputs = [title, content];
 
     //Add the d-none class to alerts and missing fields spans
@@ -16,24 +16,27 @@ const addPostEventListener = async(event) => {
         }
     })
 
+    console.log(title.value.trim(), content.value);
+    console.log(`id: ${event.target.id}`);
     //Check for empty fields
     if (title.value.trim() && content.value) {
         //Make POST Request to the backend (/api/post/add)
-        const response = await fetch('/api/post/', {
-            method: 'POST',
+        const response = await fetch(`/api/post/${event.target.id}`, {
+            method: 'PUT',
             body: JSON.stringify({
                 title: title.value.trim(),
                 content: content.value
             }),
             headers: { 'Content-Type': 'application/json' },
         })
-
+        
+        const message = await response.json();
         if (response.ok) {
-            // If successful, redirect the browser to their dashboard page
+            // If successful, redirect the browser to their dashboard page      
+            console.log(message);
             document.location.replace('/dashboard');
         } else {
             //send display message
-            const message = await response.json();
             alert.textContent = message;
             alert.classList.remove("d-none");
         }
@@ -57,5 +60,6 @@ const addPostEventListener = async(event) => {
     console.log(title.value.trim(), content.value);
 }
 
-//For Submit button in post.handlebars
-document.querySelector('.post-add').addEventListener('submit', addPostEventListener)
+
+//For Submit button in edit.handlebars
+document.querySelector('.post-edit').addEventListener('submit', editPostEventListener)
