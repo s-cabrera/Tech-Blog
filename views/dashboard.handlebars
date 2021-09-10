@@ -7,8 +7,8 @@
 <div class="card mb-3">
     <h4 class="card-header">{{post.title}}
         <a href="/api/posts/edit/{{post.id}}" class="btn btn-outline-secondary edit-btn ml-2">Edit</a>
-        <span class="post_header p-1">Posted by
-            <span class="post_author">{{../user.username}}</span>
+        <button id="{{post.id}}" style="float:right" class="btn btn-outline-secondary post-delete ml-2">Delete</button>
+        <span class="post_header p-1">Posted
             on
             <span class="post_date">{{format_date post.updated_at}}</span>
         </span>
@@ -19,3 +19,5 @@
     </div>
 </div>
 {{/each}}
+
+<script src="/js/delete.js" />

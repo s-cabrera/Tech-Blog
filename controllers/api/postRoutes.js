@@ -132,7 +132,23 @@ router.delete('/comment/delete/:id', async (req, res) => {
       res.status(200).json('Comment deleted');
     }
   }
-  catch(err){ res.status(500).json('Something went wrong while trying to delete this comment') }
+  catch(err){ res.status(500).json('Something went wrong while trying to delete this comment') 
+  }
 });
+
+router.delete('/post/delete/:id', async(req, res) => {
+  try {
+    const result = await Post.destroy({
+      where: {
+        id: req.params.id,
+      },
+    })
+    if (result) {
+      res.status(200).json('Post deleted');
+    }
+  }
+  catch(err){ res.status(500).json('Something went wrong while trying to delete this post') 
+  }
+})
 
 module.exports = router;
