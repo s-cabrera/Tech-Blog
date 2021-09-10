@@ -3,5 +3,13 @@
         <span class="post_header">{{format_date comment.created_at}}</span>
         {{user.username}}
     </h4>
-    <p class="card-body">{{content}}</p>
+    <p class="card-body">{{content}}         
+        {{#if (isCommentFromLoggedInUser logged_user_id user_id)}}
+            <button id="{{id}}" data="{{post_id}}" class="delete_btn btn btn-outline-secondary ml-3" style="float:right">Delete</button>
+        {{/if}}
+    </p>
 </div>
+
+{{!-- {{#if logged_in}}
+    <script src="/js/comment.js"></script>
+{{/if}} --}}

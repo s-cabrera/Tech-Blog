@@ -32,7 +32,7 @@
     <div class="card-body">
         <h2>Comments</h2>
         {{#each comments as |comment|}}
-            {{> comment-content}}
+            {{> comment-content logged_user_id=../logged_user_id post_id=../post.id}}
         {{/each}}
     </div>
 </div>

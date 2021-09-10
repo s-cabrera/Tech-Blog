@@ -48,7 +48,23 @@ const commentSubmitEventHandler = async(event) => {
     document.querySelector('.post-comment').classList.add('d-none')
 }
 
+const deleteCommentEventHandler = async(event)=> {
 
+    const response = await fetch(`/api/posts/comment/delete/${event.target.id}`, {method: 'DELETE'});
+
+    const message = await response.json();
+    console.log(message);
+
+    if(response.ok){
+        document.location.replace(`/api/posts/post/${event.target.getAttribute("data")}`)
+    }
+}
+
+
+
+[...document.querySelectorAll('.delete_btn')].forEach(function (item) {
+	item.addEventListener('click', deleteCommentEventHandler);
+});
 
 //The Add Comment Button on top of the Comment Card
 document.querySelector('.comment-btn').addEventListener('click', commentAddEventHandler)
