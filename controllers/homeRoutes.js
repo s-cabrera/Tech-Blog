@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
       attributes: ['id', 'title', 'content', 'updated_at'],
       include:{
         model: User,
-        attributes:['first_name', 'last_name']
+        attributes:['username', 'first_name', 'last_name']
       },
       order: [
         ['updated_at', 'DESC']
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
     // Serialize data so the template can read it
     const posts = postData.map((e) => e.get({ plain: true }));
     
-    console.log(posts);
+    // console.log(posts);
 
     if(!req.session.logged_in){
       res.render('homepage', {
@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-    console.log(user);
+    // console.log(user);
 
     res.render('homepage', {
       posts,

@@ -5,13 +5,13 @@
     <h4 class="card-header">{{post.title}}
         <a href="/api/posts/post/{{post.id}}"  class="btn btn-outline-secondary view-btn ml-2">View</a>
         <span class="post_header p-1">Posted by
-            <span class="post_author">{{post.user.first_name}} {{post.user.last_name}}</span>
+            <span class="post_author">{{post.user.username}}</span>
             on
             <span class="post_date">{{format_date post.updated_at}}</span>
         </span>
     </h4>
     <div class="card-body">
-        <p class="card-text">{{post.content}}</p>
+        <p>{{post.content}}</p>
     </div>
 </div>
 {{/each}}
